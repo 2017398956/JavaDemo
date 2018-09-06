@@ -9,6 +9,9 @@ public class FileUtil {
 
     public static void writeFile(String filePath , byte[] bytes){
         File file = new File(filePath);
+        if(!file.exists()){
+            file.getParentFile().mkdirs() ;
+        }
         FileOutputStream fout = null;
         try {
             fout = new FileOutputStream(file);

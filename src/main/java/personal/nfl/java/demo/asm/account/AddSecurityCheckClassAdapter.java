@@ -27,4 +27,10 @@ public class AddSecurityCheckClassAdapter extends ClassVisitor {
         }
         return wrappedMv;
     }
+
+    @Override
+    public void visitEnd() {
+        super.visitEnd();
+        System.out.println("AddSecurityCheckClassAdapter.visitEnd");
+    }
 }

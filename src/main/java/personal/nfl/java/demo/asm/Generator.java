@@ -22,7 +22,7 @@ public class Generator {
     }
 
     public static void generator(Class clazz) throws IOException {
-        String basePath = "../JavaDemo/out/production/classes/";
+        String basePath = "../JavaDemo/out/production/asm/";
         ClassReader classReader = new ClassReader(clazz.getName());
         ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS);
         classReader.accept(new AddSecurityCheckClassAdapter(ASM6, classWriter), SKIP_DEBUG);
