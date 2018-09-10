@@ -91,9 +91,9 @@ public class HelloGeneratorClass implements Opcodes {
             mv.visitEnd();
         }
         {
-            mv = cw.visitMethod(ACC_PUBLIC, "testList", Type.getDescriptor(List.class), "()Ljava/util/List<Ljava/lang/String;>;",
+            mv = cw.visitMethod(ACC_PUBLIC, "testList", Type.getMethodDescriptor(Type.getType(List.class)), "()Ljava/util/List<Ljava/lang/String;>;",
                     null);
-//            Type.getMethodDescriptor(Type.getType(List<String.class>) , Type.VOID_TYPE ) ;
+//            "()Ljava/util/List;"
             mv.visitCode();
             Label l0 = new Label();
             mv.visitLabel(l0);
