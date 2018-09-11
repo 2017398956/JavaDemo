@@ -41,24 +41,8 @@ public class HelloGeneratorClass implements Opcodes {
         cw.visitSource("Hello.java", null);
 
         // public static final String FLAG = "我是常量";
-        {
-            fv = cw.visitField(ACC_PUBLIC + ACC_FINAL + ACC_STATIC, "FLAG", Type.getDescriptor(String.class),
-                    null, "\u6211\u662f\u5e38\u91cf");
-            fv.visitEnd();
-        }
-        {
-            mv = cw.visitMethod(ACC_PUBLIC, "<init>", Type.getMethodDescriptor(Type.VOID_TYPE), null, null);
-            mv.visitCode();
-            Label l0 = new Label();
-            mv.visitLabel(l0);
-            mv.visitVarInsn(ALOAD, 0);
-            mv.visitMethodInsn(INVOKESPECIAL, Type.getInternalName(Object.class), "<init>", Type.getMethodDescriptor(Type.VOID_TYPE) , false);
-            mv.visitInsn(RETURN);
-            Label l1 = new Label();
-            mv.visitLabel(l1);
-            mv.visitMaxs(1, 1);
-            mv.visitEnd();
-        }
+        CodeGenerator.newField(cw , ACC_PUBLIC + ACC_FINAL + ACC_STATIC, "FLAG", String.class ,"\u6211\u662f\u5e38\u91cf");
+        CodeGenerator.createConstructor(cw);
         {
             mv = cw.visitMethod(ACC_PUBLIC, "display", Type.getMethodDescriptor(Type.VOID_TYPE) , null, null);
             mv.visitCode();
@@ -91,9 +75,10 @@ public class HelloGeneratorClass implements Opcodes {
             mv.visitEnd();
         }
         {
-            mv = cw.visitMethod(ACC_PUBLIC, "testList", Type.getMethodDescriptor(Type.getType(List.class)), "()Ljava/util/List<Ljava/lang/String;>;",
+            mv = cw.visitMethod(ACC_PUBLIC, "testList", "()Ljava/util/List;" , "()Ljava/util/List<Ljava/lang/String;>;",
                     null);
-//            "()Ljava/util/List;"
+
+//             TType.getMethodDescriptor(ype.getType(List.class))
             mv.visitCode();
             Label l0 = new Label();
             mv.visitLabel(l0);

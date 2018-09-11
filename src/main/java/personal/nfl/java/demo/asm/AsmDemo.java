@@ -26,7 +26,6 @@ public class AsmDemo {
         System.out.println(
                 Type.getMethodDescriptor(
                         Type.getType(List.class)
-//                        , Type.getType()
                 )
         );
     }
