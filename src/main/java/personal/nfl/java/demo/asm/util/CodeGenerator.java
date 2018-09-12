@@ -80,19 +80,34 @@ public class CodeGenerator {
         fv.visitEnd();
     }
 
+    /**
+     * 新建一个一般的构造方法（public xxx(){} ）
+     * @param cw
+     */
     public static void createConstructor(ClassWriter cw){
-        MethodVisitor mv = cw.visitMethod(ACC_PUBLIC, "<init>", Type.getMethodDescriptor(Type.VOID_TYPE), null, null);
-        mv.visitCode();
-        Label l0 = new Label();
-        mv.visitLabel(l0);
-        mv.visitVarInsn(ALOAD, 0);
-        mv.visitMethodInsn(INVOKESPECIAL, Type.getInternalName(Object.class), "<init>", Type.getMethodDescriptor(Type.VOID_TYPE) , false);
-        mv.visitInsn(RETURN);
-        Label l1 = new Label();
-        mv.visitLabel(l1);
-        mv.visitMaxs(1, 1);
-        mv.visitEnd();
+        createConstructor(cw , ACC_PUBLIC ) ;
     }
 
+    public static void createConstructor(ClassWriter cw , int access){
+        MethodVisitor mv = cw.visitMethod(access , "<init>", Type.getMethodDescriptor(Type.VOID_TYPE), null, null);
+//        mv.visitCode();
+
+//        Label l0 = new Label();
+//        mv.visitLabel(l0);
+
+        mv.visitVarInsn(ALOAD, 0);
+        mv.visitMethodInsn(INVOKESPECIAL, Type.getInternalName(Object.class), "<init>", Type.getMethodDescriptor(Type.VOID_TYPE) , false);
+//        println(mv , "test");
+//        println(mv , "test2");
+        mv.visitInsn(RETURN);
+
+//        Label l1 = new Label();
+//        mv.visitLabel(l1);
+
+        mv.visitMaxs(1, 1);
+//        mv.visitMaxs(2, 1);
+
+//        mv.visitEnd();
+    }
 
 }

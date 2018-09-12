@@ -46,31 +46,48 @@ public class HelloGeneratorClass implements Opcodes {
         {
             mv = cw.visitMethod(ACC_PUBLIC, "display", Type.getMethodDescriptor(Type.VOID_TYPE) , null, null);
             mv.visitCode();
-            Label l0 = new Label();
-            mv.visitLabel(l0);
+
+//            Label l0 = new Label();
+//            mv.visitLabel(l0);
+
             mv.visitInsn(ICONST_0);
             mv.visitVarInsn(ISTORE, 1);
-            Label l1 = new Label();
-            mv.visitLabel(l1);
+
+//            Label l1 = new Label();
+//            mv.visitLabel(l1);
+
             Label l2 = new Label();
             mv.visitJumpInsn(GOTO, l2);
+
             Label l3 = new Label();
             mv.visitLabel(l3);
-            mv.visitFrame(Opcodes.F_APPEND, 1, new Object[]{Opcodes.INTEGER}, 0, null);
+
+            mv.visitFrame(Opcodes.F_APPEND, 1, new Object[]{ Opcodes.INTEGER }, 0, null);
+
             CodeGenerator.println(mv , ">>>>>>>>>>\u6211\u662f\u5e38\u91cf");
-            Label l4 = new Label();
-            mv.visitLabel(l4);
-            mv.visitIincInsn(1, 1);
+
+//            Label l4 = new Label();
+//            mv.visitLabel(l4);
+
+            mv.visitIincInsn(1, 2);// increment 每次运算增大的量
+
             mv.visitLabel(l2);
+
             mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+
             mv.visitVarInsn(ILOAD, 1);
-            mv.visitIntInsn(BIPUSH, 8);
+            mv.visitIntInsn(BIPUSH, 8);// 最大的数
+
             mv.visitJumpInsn(IF_ICMPLT, l3);
-            Label l5 = new Label();
-            mv.visitLabel(l5);
+
+//            Label l5 = new Label();
+//            mv.visitLabel(l5);
+
             mv.visitInsn(RETURN);
-            Label l6 = new Label();
-            mv.visitLabel(l6);
+
+//            Label l6 = new Label();
+//            mv.visitLabel(l6);
+
             mv.visitMaxs(2, 2);
             mv.visitEnd();
         }
@@ -80,8 +97,8 @@ public class HelloGeneratorClass implements Opcodes {
 
 //             TType.getMethodDescriptor(ype.getType(List.class))
             mv.visitCode();
-            Label l0 = new Label();
-            mv.visitLabel(l0);
+//            Label l0 = new Label();
+//            mv.visitLabel(l0);
             mv.visitTypeInsn(NEW, "java/util/ArrayList");
             mv.visitInsn(DUP);
             mv.visitMethodInsn(INVOKESPECIAL, "java/util/ArrayList", "<init>", "()V", false);

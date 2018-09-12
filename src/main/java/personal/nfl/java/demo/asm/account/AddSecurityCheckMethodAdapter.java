@@ -13,13 +13,14 @@ public class AddSecurityCheckMethodAdapter extends MethodVisitor {
 
     public AddSecurityCheckMethodAdapter(int api, MethodVisitor methodVisitor) {
         super(api, methodVisitor);
+        // 父变量的 mv 和 methodVisitor 是同一个值
     }
 
 
     public void visitCode() {
-        super.visitCode();
-        System.out.println("visitCode()");
-
+        mv.visitCode();
+        CodeGenerator.println(mv , "开始访问方法");
+//        super.visitCode();
 
 //        0 invokestatic #2 <personal/nfl/java/demo/asm/util/SecurityChecker/checkSecurity()Z>
 //                3 ifeq 24 (+21)
@@ -48,10 +49,19 @@ public class AddSecurityCheckMethodAdapter extends MethodVisitor {
 
     @Override
     public void visitInsn(int opcode) {
-        System.out.println("opcode: " + opcode);
+        /**
+         * {@linkplain Opcodes#IRETURN} , {@linkplain Opcodes#LRETURN} , {@linkplain Opcodes#FRETURN} ,
+         * {@linkplain Opcodes#DRETURN} , {@linkplain Opcodes#ARETURN} , {@linkplain Opcodes#RETURN}
+         * 都是表示结束方法访问
+         */
+        // 由于这个方法是 void 的所以只判断 {@linkplain Opcodes#RETURN} 就行了
         if (opcode == Opcodes.RETURN) {
+            // 当匹配到 Opcodes.RETURN 时，说明方法访问即将结束，可以在方法结束前加入一些操作，
+            // 但不能放在下面的 super.visitInsn 之后，否则不会执行
             visitMethodInsn(Opcodes.INVOKESTATIC, Type.getInternalName(SecurityChecker.class),
                     "checkSecurity", Type.getMethodDescriptor(Type.BOOLEAN_TYPE), false);
+            CodeGenerator.println(mv , "方法执行完毕。");
+            CodeGenerator.println(mv , "++++++++++++++++++++++++++");
         }
         super.visitInsn(opcode);
     }
@@ -65,6 +75,7 @@ public class AddSecurityCheckMethodAdapter extends MethodVisitor {
     @Override
     public void visitEnd() {
         super.visitEnd();
+        // 当该方法访问完毕时，可以在这里做一些收尾的工作，但不能再往方法中添加代码了
     }
 
     private BaseStatementBlock isSafe = new BaseStatementBlock() {

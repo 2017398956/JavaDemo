@@ -4,6 +4,10 @@ import personal.nfl.java.demo.asm.util.SecurityChecker;
 
 public class Account {
 
+    public Account(){
+        System.out.println("Account");
+    }
+
 //    public int operation() {
 //        System.out.println("Account.operation( )");
 //        System.out.println("Account.operation2( )");
@@ -36,4 +40,21 @@ public class Account {
 //        }
 //        return 2 ;
 //    }
+
+    public Account getValue(){
+        return new Account() ;
+    }
+
+    private final void willBeDeletedMethod(){
+        System.out.println("这个方法将会被 asm 删除");
+    }
+
+    private final void willBeClearedMethod(){
+        System.out.println("这个方法将会被 asm 清空");
+    }
+
+    public boolean shouldBeProxyedMethod(){
+        System.out.println("这个方法将会被代理。");
+        return true ;
+    }
 }
