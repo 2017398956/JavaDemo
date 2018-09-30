@@ -1,12 +1,19 @@
 package personal.nfl.java.demo.proxy;
 
+import sun.misc.ProxyGenerator;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 
 public class ProxyMain {
 
+    static {
+
+    }
+
     public static void main(String[] args) {
 
+        // 注意这里的 true 必须为 字符串才有效 ，执行后会在项目目录下生成 com.sun.proxy 包，代理的过程类就在里面
         System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
 
         //    我们要代理的真实对象
