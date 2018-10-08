@@ -18,9 +18,11 @@ public class ProxyMain {
 
         //    我们要代理的真实对象
         Subject realSubject = new RealSubject();
+        Subject2 realSubject2 = new RealSubject2();
 
         //    我们要代理哪个真实对象，就将该对象传进去，最后是通过该真实对象来调用其方法的
         InvocationHandler handler = new DynamicProxy(realSubject);
+        InvocationHandler handler2 = new DynamicProxy2(realSubject2);
 
         /*
          * 通过Proxy的newProxyInstance方法来创建我们的代理对象，我们来看看其三个参数
@@ -30,7 +32,11 @@ public class ProxyMain {
          */
         Subject subject = (Subject) Proxy.newProxyInstance(handler.getClass().getClassLoader(), realSubject
                 .getClass().getInterfaces(), handler);
+        Subject2 subject2 = (Subject2) Proxy.newProxyInstance(handler.getClass().getClassLoader(), realSubject2
+                .getClass().getInterfaces(), handler2);
 
+        System.out.println("$Proxy0.class全名: "+Proxy.getProxyClass(subject2.getClass().getClassLoader(), Subject.class));
+//        System.out.println("$Proxy0.class全名: "+Proxy.getProxyClass(Subject.class.getClassLoader(), Subject.class));
         System.out.println(subject.getClass().getName());
         subject.rent();
         subject.hello("world");
