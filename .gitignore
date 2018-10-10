@@ -16,3 +16,4 @@ gradle-app.setting
 /out
 /com
 /*.iml
+/MyTemp

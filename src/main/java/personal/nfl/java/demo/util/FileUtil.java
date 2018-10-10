@@ -7,10 +7,10 @@ import java.io.IOException;
 
 public class FileUtil {
 
-    public static void writeFile(String filePath , byte[] bytes){
+    public static void writeFile(String filePath, byte[] bytes) {
         File file = new File(filePath);
-        if(!file.exists()){
-            file.getParentFile().mkdirs() ;
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
         }
         FileOutputStream fout = null;
         try {
@@ -23,5 +23,13 @@ public class FileUtil {
             e.printStackTrace();
         }
 
+    }
+
+    public static String getProjectDir() {
+        return System.getProperties().getProperty("user.dir");
+    }
+
+    public static String getMyTempDir() {
+        return System.getProperties().getProperty("user.dir") + File.separator + "MyTemp" + File.separator;
     }
 }
